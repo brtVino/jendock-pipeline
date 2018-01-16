@@ -10,7 +10,7 @@ node {
 	stage('Build image') {
 		/* This builds the image (synonymous to docker build) */
 
-		app = docker.build("brtVino/jendock-pipeline")
+		app = docker.build("brtvino/jendock-pipeline")
 
 	}
 
