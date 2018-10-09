@@ -5,6 +5,7 @@ pipeline {
       steps {
         pwd()
         sleep 5
+        dir(path: 'pwd')
       }
     }
     stage('Build') {
