@@ -1,0 +1,8 @@
+Initial Release
+	- New Features:
+		- Print "Hello World to the Screen"
+		- Shell scripts to build and test the code
+		- Creates a docker image of Hello World app
+		- Shell script to pull images from central brt repo
+		- Can push images to central docker repo system-services.bluerivertech.com/brtdockerrepo
+		- Can pull images from central docker repo system-services.bluerivertech.com/brtdockerrepo

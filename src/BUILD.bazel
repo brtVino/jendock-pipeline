@@ -1,0 +1,50 @@
+load(
+    "@io_bazel_rules_docker//container:container.bzl",
+    "container_image",
+    "container_push",
+    container_repositories = "repositories",
+)
+
+cc_library(
+    name = "lib_hello_world",
+    srcs = ["hello_world.cpp"],
+    hdrs = ["include/hello_world.h"],
+    strip_include_prefix = "include",
+)
+
+cc_binary(
+    name = "hello_world_app",
+    srcs = ["main.cpp"],
+    deps = ["lib_hello_world"],
+)
+
+cc_test(
+    name = "hello_world_test",
+    srcs = ["test/test_main.cpp"],
+    deps = [
+        "lib_hello_world",
+        "@gtest",
+    ],
+)
+
+container_image(
+    name = "helloworld-cpp_image",
+    base = "@cc_image_base//image",
+    stamp = True,
+)
+
+container_push(
+    name = "push_helloworld",
+    format = "Docker",
+    image = ":helloworld-cpp_image",
+    registry = "system-services.bluerivertech.com:16000",
+    repository = "brtdockerrepo/helloworld-cpp",
+    tag = "v0.0.1",
+)
+
+#Example for pulling docker images with bazel
+container_image(
+    name = "helloworld-cpp_from_repo",
+    base = "@pull_helloworld//image",
+    stamp = True,
+)
